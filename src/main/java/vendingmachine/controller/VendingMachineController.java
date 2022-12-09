@@ -31,14 +31,17 @@ public class VendingMachineController {
     private void insertMoney() {
         int money = Utils.requestInput(InputView::requestInsertMoney, OutputView::printErrorMessage);
         vendingMachineService.insertMoney(money);
-        OutputView.printRemainingMoney(money);
     }
 
     private void useVendingMachine() {
-        Utils.exceptionHandlingRepeatSelf(this::buyProduct, OutputView::printErrorMessage);
+        while (vendingMachineService.isPossibleToBuy()) {
+            Utils.exceptionHandlingRepeatSelf(this::buyProduct, OutputView::printErrorMessage);
+        }
     }
 
     private void buyProduct() {
+        int remainingMoney = vendingMachineService.findRemainingMoney();
+        OutputView.printRemainingMoney(remainingMoney);
         String productName = InputView.requestBuyProduct();
         vendingMachineService.buyProduct(productName);
     }

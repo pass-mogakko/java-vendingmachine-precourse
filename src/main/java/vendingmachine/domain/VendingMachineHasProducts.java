@@ -31,4 +31,17 @@ public class VendingMachineHasProducts {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.NOT_FOUND_PRODUCT));
     }
+
+    public int findProductLowestPrice() {
+        return products.stream()
+                .filter(product -> !product.isSoldOut())
+                .mapToInt(Product::getPrice)
+                .min()
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.ALL_PRODUCT_SOLD_OUT));
+    }
+
+    public boolean isAllSoldOut() {
+        return products.stream()
+                .allMatch(Product::isSoldOut);
+    }
 }

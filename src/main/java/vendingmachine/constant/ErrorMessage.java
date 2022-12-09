@@ -11,4 +11,5 @@ public class ErrorMessage {
     public static final String NOT_FOUND_PRODUCT = "해당하는 상품을 찾을 수 없습니다.";
     public static final String PRODUCT_SOLD_OUT = "해당상품은 품절입니다.";
     public static final String LACK_MONEY = "해당 상품을 사기에는 돈이 부족합니다.";
+    public static final String ALL_PRODUCT_SOLD_OUT = "모든상품은 품절입니다.";
 }

@@ -51,6 +51,10 @@ public class Product {
         count--;
     }
 
+    public boolean isSoldOut() {
+        return count == 0;
+    }
+
     public int getPrice() {
         return price;
     }

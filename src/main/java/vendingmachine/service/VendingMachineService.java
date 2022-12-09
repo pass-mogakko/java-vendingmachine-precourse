@@ -27,9 +27,25 @@ public class VendingMachineService {
         moneyOfHumanInVendingMachine = new MoneyOfHumanInVendingMachine(money);
     }
 
+    public int findRemainingMoney() {
+        return moneyOfHumanInVendingMachine.getMoney();
+    }
+
     public void buyProduct(String productName) {
         int remainingMoney = moneyOfHumanInVendingMachine.getMoney();
         int productPrice = vendingMachineHasProducts.buy(productName, remainingMoney);
         moneyOfHumanInVendingMachine.spendMoney(productPrice);
+    }
+
+    public boolean isPossibleToBuy() {
+        if (vendingMachineHasProducts.isAllSoldOut()) {
+            return false;
+        }
+        int remainingMoney = moneyOfHumanInVendingMachine.getMoney();
+        int lowestPrice = vendingMachineHasProducts.findProductLowestPrice();
+        if (remainingMoney < lowestPrice) {
+            return false;
+        }
+        return true;
     }
 }
