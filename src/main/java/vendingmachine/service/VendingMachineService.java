@@ -27,6 +27,9 @@ public class VendingMachineService {
         moneyOfHumanInVendingMachine = new MoneyOfHumanInVendingMachine(money);
     }
 
-//    public void buyProduct(String productName) {
-//    }
+    public void buyProduct(String productName) {
+        int remainingMoney = moneyOfHumanInVendingMachine.getMoney();
+        int productPrice = vendingMachineHasProducts.buy(productName, remainingMoney);
+        moneyOfHumanInVendingMachine.spendMoney(productPrice);
+    }
 }

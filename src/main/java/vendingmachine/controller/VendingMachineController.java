@@ -13,7 +13,8 @@ public class VendingMachineController {
     public void run() {
         requestVendingMachineHasChange();
         Utils.exceptionHandlingRepeatSelf(this::requestVendingMachineHasProducts, OutputView::printErrorMessage);
-        requestInsertMoney();
+        insertMoney();
+        useVendingMachine();
     }
 
     private void requestVendingMachineHasChange() {
@@ -33,12 +34,12 @@ public class VendingMachineController {
         OutputView.printRemainingMoney(money);
     }
 
-//    private void useVendingMachine() {
-//        Utils.exceptionHandlingRepeatSelf(this::buyProduct, OutputView::printErrorMessage);
-//    }
-//
-//    private void buyProduct() {
-//        String productName = InputView.requestBuyProduct();
-//        vendingMachineService.buyProduct(productName);
-//    }
+    private void useVendingMachine() {
+        Utils.exceptionHandlingRepeatSelf(this::buyProduct, OutputView::printErrorMessage);
+    }
+
+    private void buyProduct() {
+        String productName = InputView.requestBuyProduct();
+        vendingMachineService.buyProduct(productName);
+    }
 }

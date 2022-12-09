@@ -9,7 +9,7 @@ public class Product {
     private static final String PRODUCT_FORM_REGEX = "^\\[[^ ]+,[0-9]+,[0-9]+\\]$";
     private final String name;
     private final int price;
-    private final int count;
+    private int count;
 
     public Product(String userInput) {
         validateUserInput(userInput);
@@ -38,5 +38,20 @@ public class Product {
         if (price % Constant.TEN_WON_VALUE != 0) {
             throw new IllegalArgumentException(ErrorMessage.MONEY_MUST_BE_DIVISIBLE_TEN_WON);
         }
+    }
+
+    public boolean isSameName(String name) {
+        return this.name.equals(name);
+    }
+
+    public void buy() {
+        if (count == 0) {
+            throw new IllegalArgumentException(ErrorMessage.PRODUCT_SOLD_OUT);
+        }
+        count--;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }

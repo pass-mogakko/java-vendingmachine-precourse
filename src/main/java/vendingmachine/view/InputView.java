@@ -43,4 +43,8 @@ public class InputView {
         return Integer.parseInt(input);
     }
 
+    public static String requestBuyProduct() {
+        System.out.println(Message.REQUEST_BUY_PRODUCT);
+        return Console.readLine();
+    }
 }

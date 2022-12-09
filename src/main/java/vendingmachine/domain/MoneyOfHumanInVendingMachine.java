@@ -7,4 +7,12 @@ public class MoneyOfHumanInVendingMachine {
     public MoneyOfHumanInVendingMachine(int money) {
         this.money = money;
     }
+
+    public void spendMoney(int productPrice) {
+        money -= productPrice;
+    }
+
+    public int getMoney() {
+        return money;
+    }
 }
