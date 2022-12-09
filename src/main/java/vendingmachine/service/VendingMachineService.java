@@ -43,10 +43,7 @@ public class VendingMachineService {
         }
         int remainingMoney = moneyOfHumanInVendingMachine.getMoney();
         int lowestPrice = vendingMachineHasProducts.findProductLowestPrice();
-        if (remainingMoney < lowestPrice) {
-            return false;
-        }
-        return true;
+        return remainingMoney >= lowestPrice;
     }
 
     public Map<Integer, Integer> takeChange() {
