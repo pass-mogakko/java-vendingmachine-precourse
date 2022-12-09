@@ -27,7 +27,18 @@ public class VendingMachineController {
         vendingMachineService.insertProducts(products);
     }
 
-    private void requestInsertMoney() {
-        int insertMoney = Utils.requestInput(InputView::requestInsertMoney, OutputView::printErrorMessage);
+    private void insertMoney() {
+        int money = Utils.requestInput(InputView::requestInsertMoney, OutputView::printErrorMessage);
+        vendingMachineService.insertMoney(money);
+        OutputView.printRemainingMoney(money);
     }
+
+//    private void useVendingMachine() {
+//        Utils.exceptionHandlingRepeatSelf(this::buyProduct, OutputView::printErrorMessage);
+//    }
+//
+//    private void buyProduct() {
+//        String productName = InputView.requestBuyProduct();
+//        vendingMachineService.buyProduct(productName);
+//    }
 }

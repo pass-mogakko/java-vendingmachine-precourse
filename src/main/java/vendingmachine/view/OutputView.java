@@ -27,4 +27,10 @@ public class OutputView {
         System.out.printf(MessageForm.COIN_COUNT_MESSAGE_FORM, coinAmount, coinCount);
         System.out.println();
     }
+
+    public static void printRemainingMoney(int money) {
+        System.out.println();
+        System.out.printf(MessageForm.REMAINING_MONEY, money);
+        System.out.println();
+    }
 }
