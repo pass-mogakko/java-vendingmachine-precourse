@@ -48,4 +48,9 @@ public class VendingMachineService {
         }
         return true;
     }
+
+    public Map<Integer, Integer> takeChange() {
+        int remainingMoney = moneyOfHumanInVendingMachine.getMoney();
+        return vendingMachineHasCoins.takeChange(remainingMoney);
+    }
 }

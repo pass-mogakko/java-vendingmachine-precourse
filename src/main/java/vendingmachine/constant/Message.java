@@ -7,4 +7,5 @@ public class Message {
     public static final String REQUEST_VENDING_MACHINE_HAS_PRODUCTS = "상품명과 가격, 수량을 입력해 주세요.";
     public static final String REQUEST_INSERT_MONEY = "투입 금액을 입력해 주세요.";
     public static final String REQUEST_BUY_PRODUCT = "구매할 상품명을 입력해 주세요.";
+    public static final String CHANGE = "잔돈";
 }

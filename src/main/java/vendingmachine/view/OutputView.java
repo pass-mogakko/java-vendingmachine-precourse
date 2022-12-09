@@ -17,20 +17,29 @@ public class OutputView {
     public static void printVendingMachineHasCoins(Map<Integer, Integer> vendingMachineHasCoins) {
         System.out.println();
         System.out.println(Message.VENDING_MACHINE_HAS_COINS);
-        ArrayList<Integer> coinAmounts = new ArrayList<>(vendingMachineHasCoins.keySet());
-        Collections.sort(coinAmounts);
-        Collections.reverse(coinAmounts);
-        coinAmounts.forEach(coinAmount -> printVendingMachineHasCoin(coinAmount, vendingMachineHasCoins.get(coinAmount)));
-    }
-
-    private static void printVendingMachineHasCoin(int coinAmount, int coinCount) {
-        System.out.printf(MessageForm.COIN_COUNT_MESSAGE_FORM, coinAmount, coinCount);
-        System.out.println();
+        printCoins(vendingMachineHasCoins);
     }
 
     public static void printRemainingMoney(int money) {
         System.out.println();
         System.out.printf(MessageForm.REMAINING_MONEY, money);
+        System.out.println();
+    }
+
+    public static void printChange(Map<Integer, Integer> changeAndChangeCount) {
+        System.out.println(Message.CHANGE);
+        printCoins(changeAndChangeCount);
+    }
+
+    private static void printCoins(Map<Integer, Integer> coinAmountAndCoinCount) {
+        ArrayList<Integer> coinAmounts = new ArrayList<>(coinAmountAndCoinCount.keySet());
+        Collections.sort(coinAmounts);
+        Collections.reverse(coinAmounts);
+        coinAmounts.forEach(coinAmount -> printCoins(coinAmount, coinAmountAndCoinCount.get(coinAmount)));
+    }
+
+    private static void printCoins(int coinAmount, int coinCount) {
+        System.out.printf(MessageForm.COIN_COUNT_MESSAGE_FORM, coinAmount, coinCount);
         System.out.println();
     }
 }
