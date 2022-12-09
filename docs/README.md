@@ -33,19 +33,19 @@
 
 ## 프로그래밍 요구사항
 
-- [ ] 잘못된 값을 입력할 경우 `IllegalArgumentException`을 발생시키고 "[ERROR]"로 시작하는 에러 메시지를 출력
-- [ ] 프로그래밍 실행 결과 예시와 동일하게 입력과 출력이 이루어져야 함력
-- [ ] 들여쓰기의 깊이는 최대 2
-- [ ] 3항 연산자 사용하지 않기
-- [ ] 메소드의 최대 길이는 15
-- [ ] else 예약어 사용하지 않기
-- [ ] 모든 예제 테스트 통과하기
+- [x] 잘못된 값을 입력할 경우 `IllegalArgumentException`을 발생시키고 "[ERROR]"로 시작하는 에러 메시지를 출력
+- [x] 프로그래밍 실행 결과 예시와 동일하게 입력과 출력이 이루어져야 함
+- [x] 들여쓰기의 깊이는 최대 2
+- [x] 3항 연산자 사용하지 않기
+- [x] 메소드의 최대 길이는 15
+- [x] else 예약어 사용하지 않기
+- [x] 모든 예제 테스트 통과하기
 
 ### 프로그래밍 요구사항 - Coin
 
-- [ ] amount 필드의 접근 제어자 private 변경하지 않기
+- [x] amount 필드의 접근 제어자 private 변경하지 않기
 
 ### 프로그래밍 요구사항 - Randoms, Console
 
-- [ ] Random 값 추출시, `camp.nextstep.edu.missionutils.Randoms`의 `pickNumberInList()` 활용
-- [ ] 사용자가 입력하는 값은, `camp.nextstep.edu.missionutils.Console`의 `readLine()`을 활용
+- [x] Random 값 추출시, `camp.nextstep.edu.missionutils.Randoms`의 `pickNumberInList()` 활용
+- [x] 사용자가 입력하는 값은, `camp.nextstep.edu.missionutils.Console`의 `readLine()`을 활용
