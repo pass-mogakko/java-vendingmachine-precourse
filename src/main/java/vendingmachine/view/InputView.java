@@ -8,9 +8,9 @@ import vendingmachine.util.Utils;
 
 public class InputView {
 
-    public static int requestVendingMachineHasCoin() {
+    public static int requestVendingMachineHasChange() {
         System.out.println();
-        System.out.println(Message.REQUEST_VENDING_MACHINE_HAS_COIN);
+        System.out.println(Message.REQUEST_VENDING_MACHINE_HAS_CHANGE);
         String input = Console.readLine();
         validateVendingMachineHasCoin(input);
         return Integer.parseInt(input);
