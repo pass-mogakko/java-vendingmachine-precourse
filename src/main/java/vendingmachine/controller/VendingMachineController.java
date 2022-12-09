@@ -13,6 +13,7 @@ public class VendingMachineController {
     public void run() {
         requestVendingMachineHasChange();
         Utils.exceptionHandlingRepeatSelf(this::requestVendingMachineHasProducts, OutputView::printErrorMessage);
+        requestInsertMoney();
     }
 
     private void requestVendingMachineHasChange() {
@@ -24,5 +25,9 @@ public class VendingMachineController {
     private void requestVendingMachineHasProducts() {
         String products = InputView.requestVendingMachineHasProducts();
         vendingMachineService.insertProducts(products);
+    }
+
+    private void requestInsertMoney() {
+        int insertMoney = Utils.requestInput(InputView::requestInsertMoney, OutputView::printErrorMessage);
     }
 }

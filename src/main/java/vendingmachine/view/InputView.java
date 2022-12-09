@@ -12,11 +12,11 @@ public class InputView {
         System.out.println();
         System.out.println(Message.REQUEST_VENDING_MACHINE_HAS_CHANGES);
         String input = Console.readLine();
-        validateVendingMachineHasChanges(input);
+        validateMoney(input);
         return Integer.parseInt(input);
     }
 
-    static void validateVendingMachineHasChanges(String input) {
+    static void validateMoney(String input) {
         if (!Utils.isNumber(input)) {
             throw new IllegalArgumentException(ErrorMessage.MONEY_MUST_BE_NUMBER);
         }
@@ -34,4 +34,13 @@ public class InputView {
         System.out.println(Message.REQUEST_VENDING_MACHINE_HAS_PRODUCTS);
         return Console.readLine();
     }
+
+    public static int requestInsertMoney() {
+        System.out.println();
+        System.out.println(Message.REQUEST_INSERT_MONEY);
+        String input = Console.readLine();
+        validateMoney(input);
+        return Integer.parseInt(input);
+    }
+
 }
