@@ -20,4 +20,13 @@ public class Utils {
             return requestInput(requestInputFunction, printErrorFunction);
         }
     }
+
+    public static void exceptionHandlingRepeatSelf(Runnable action, Consumer<String> printErrorFunction) {
+        try {
+            action.run();
+        } catch (IllegalArgumentException e) {
+            printErrorFunction.accept(e.getMessage());
+            exceptionHandlingRepeatSelf(action, printErrorFunction);
+        }
+    }
 }

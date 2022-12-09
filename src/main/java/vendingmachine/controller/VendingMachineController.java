@@ -11,12 +11,18 @@ public class VendingMachineController {
     private final VendingMachineService vendingMachineService = new VendingMachineService();
 
     public void run() {
-        requestVendingMachineHasCoins();
+        requestVendingMachineHasChange();
+        Utils.exceptionHandlingRepeatSelf(this::requestVendingMachineHasProducts, OutputView::printErrorMessage);
     }
 
-    private void requestVendingMachineHasCoins() {
-        int vendingMachineHasChange = Utils.requestInput(InputView::requestVendingMachineHasChange, OutputView::printErrorMessage);
+    private void requestVendingMachineHasChange() {
+        int vendingMachineHasChange = Utils.requestInput(InputView::requestVendingMachineHasChanges, OutputView::printErrorMessage);
         Map<Integer, Integer> vendingMachineHasCoins = vendingMachineService.createRandomCoin(vendingMachineHasChange);
         OutputView.printVendingMachineHasCoins(vendingMachineHasCoins);
+    }
+
+    private void requestVendingMachineHasProducts() {
+        String products = InputView.requestVendingMachineHasProducts();
+        vendingMachineService.insertProducts(products);
     }
 }
