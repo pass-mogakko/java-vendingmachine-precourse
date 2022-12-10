@@ -8,4 +8,11 @@ public class MachineCoins {
     public MachineCoins(CoinsMaker coinsMaker, int holdingAmount) {
         this.countByCoin = coinsMaker.make(holdingAmount);
     }
+
+    @Override
+    public String toString() {
+        return "MachineCoins{" +
+                "countByCoin=" + countByCoin +
+                '}';
+    }
 }

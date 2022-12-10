@@ -17,11 +17,12 @@ class MachineCoinsMakerTest {
         Map<Coin, Integer> countByCoin = machineCoinsMaker.make(holdingAmount);
         int coinTotalAmount = countByCoin.keySet()
                 .stream()
-                .map(coin -> (coin.getAmount())*countByCoin.get(coin))
+                .map(coin -> (coin.getAmount()) * countByCoin.get(coin))
                 .reduce(0, Integer::sum);
 
+        System.out.println(countByCoin);
         assertThat(countByCoin).hasSize(Coin.values().length);
-        assertThat((holdingAmount - coinTotalAmount) < Coin.getMinimumAmount()).isTrue();
+        assertThat(holdingAmount - (holdingAmount % Coin.getMinimumAmount())).isEqualTo(coinTotalAmount);
     }
 
     @Test

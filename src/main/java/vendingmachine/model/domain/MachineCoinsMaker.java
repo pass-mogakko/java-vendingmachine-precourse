@@ -31,9 +31,12 @@ public class MachineCoinsMaker implements CoinsMaker {
     private void setCountByCoin(Map<Coin, Integer> countByCoin, int holdingAmount) {
         while (holdingAmount >= Coin.getMinimumAmount()) {
             int coinAmount = Randoms.pickNumberInList(Coin.getAllAmountTypes());
+            if ((holdingAmount - coinAmount) < 0) {
+                continue;
+            }
+            holdingAmount -= coinAmount;
             Coin coin = Coin.findByAmount(coinAmount);
             countByCoin.put(coin, countByCoin.getOrDefault(coin, 0) + 1);
-            holdingAmount -= coinAmount;
         }
     }
 }
