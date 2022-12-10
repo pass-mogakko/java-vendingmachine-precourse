@@ -24,7 +24,7 @@ public class MachineCoinsMaker implements CoinsMaker {
 
     private void validateHoldingAmount(int holdingAmount) {
         if (holdingAmount < 0) {
-            throw new IllegalArgumentException(ErrorMessage.HOLDING_AMOUNT_INVALID_VALUE);
+            throw new IllegalArgumentException(ErrorMessage.HOLDING_AMOUNT_OUT_OF_BOUNDS);
         }
     }
 
