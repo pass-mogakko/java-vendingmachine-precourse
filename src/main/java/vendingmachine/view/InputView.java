@@ -8,6 +8,7 @@ import static vendingmachine.view.constants.InputFormat.ITEMS_DELIMITER;
 import static vendingmachine.view.constants.InputFormat.ITEM_PATTERN;
 import static vendingmachine.view.constants.InputFormat.ITEM_PROPERTY_DELIMITER;
 import static vendingmachine.view.constants.InputMessage.INPUT_HOLDING_AMOUNT;
+import static vendingmachine.view.constants.InputMessage.INPUT_INSERT_MONEY_AMOUNT;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
@@ -29,11 +30,8 @@ public class InputView {
         String readLine = Console.readLine();
         String[] inputItems = readLine.split(ITEMS_DELIMITER);
         validateItemsFormat(inputItems);
-        List<ItemDTO> items = Arrays.stream(inputItems)
-                .map(this::parseItem)
-                .collect(Collectors.toList());
         System.out.println();
-        return items;
+        return parseItems(inputItems);
     }
 
     private void validateItemsFormat(String[] inputItems) {
@@ -45,6 +43,12 @@ public class InputView {
         }
     }
 
+    private List<ItemDTO> parseItems(String[] inputItems) {
+        return Arrays.stream(inputItems)
+                .map(this::parseItem)
+                .collect(Collectors.toList());
+    }
+
     private ItemDTO parseItem(String inputItem) {
         String item = inputItem.substring(1, inputItem.length() - 1);
         String[] properties = item.split(ITEM_PROPERTY_DELIMITER);
@@ -54,6 +58,13 @@ public class InputView {
     private boolean isCorrectFormat(String[] inputItems) {
         return Arrays.stream(inputItems)
                 .allMatch(inputItem -> ITEM_PATTERN.matcher(inputItem).matches());
+    }
+
+    public int inputInsertMoneyAmount() {
+        System.out.println(INPUT_INSERT_MONEY_AMOUNT);
+        int amount = readNumber();
+        System.out.println();
+        return amount;
     }
 
     private int readNumber() {

@@ -22,4 +22,8 @@ public class VendingMachineService {
         MachineItems machineItems = new MachineItems(items);
         vendingMachine.insertItems(machineItems);
     }
+
+    public void insertMoneyToVendingMachine(int insertMoneyAMount) {
+        vendingMachine.insertMoney(insertMoneyAMount);
+    }
 }

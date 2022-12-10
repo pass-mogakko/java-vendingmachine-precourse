@@ -16,6 +16,7 @@ public class VendingMachineController {
         initializeMachineCoins();
         showMachineCoins();
         initializeMachineItems();
+        insertMoney();
     }
 
     private void initializeMachineCoins() {
@@ -31,5 +32,10 @@ public class VendingMachineController {
     private void initializeMachineItems() {
         List<ItemDTO> machineItems = inputView.inputItems();
         vendingMachineService.insertItemsToVendingMachine(machineItems);
+    }
+
+    private void insertMoney() {
+        int insertMoneyAMount = inputView.inputInsertMoneyAmount();
+        vendingMachineService.insertMoneyToVendingMachine(insertMoneyAMount);
     }
 }
