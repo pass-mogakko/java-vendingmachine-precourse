@@ -40,10 +40,10 @@ public class VendingMachine {
         insertedAmount -= price;
     }
 
-//    public boolean isAvailable() {
-//        if (insertedAmount < machineItems.findMinimumPrice()) {
-//            return false;
-//        }
-//        return machineItems.sumQuantity() != 0;
-//    }
+    public boolean isAvailable() {
+        if (insertedAmount < machineItems.findMinimumPrice()) {
+            return false;
+        }
+        return machineItems.sumQuantity() != 0;
+    }
 }

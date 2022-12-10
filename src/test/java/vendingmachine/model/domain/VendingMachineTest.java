@@ -58,29 +58,31 @@ class VendingMachineTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-//    @Test
-//    void 구매_가능_확인_참() {
-//        VendingMachine vendingMachine = new VendingMachine();
-//        vendingMachine.insertMoney(1000);
-//        vendingMachine.insertItems(new MachineItems(List.of(new Item("상품명", 500, 1))));
-//
-//        assertThat(vendingMachine.isAvailable()).isTrue();
-//    }
-//
-//    @Test
-//    void 구매_가능_확인_남은_투입_금액이_상품_최저_가격보다_작으면_거짓() {
-//        VendingMachine vendingMachine = new VendingMachine();
-//        vendingMachine.insertMoney(100);
-//        vendingMachine.insertItems(new MachineItems(List.of(new Item("상품명", 500, 1))));
-//
-//        assertThat(vendingMachine.isAvailable()).isFalse();
-//    }
-//
-//    @Test
-//    void 구매_가능_확인_남은_상품_수량이_0이면_거짓() {
-//        VendingMachine vendingMachine = new VendingMachine();
-//        vendingMachine.insertItems(new MachineItems(List.of(new Item("상품명", 500, 1))));
-//
-//        assertThat(vendingMachine.isAvailable()).isFalse();
-//    }
+    @Test
+    void 구매_가능_확인_참() {
+        VendingMachine vendingMachine = new VendingMachine();
+        vendingMachine.insertMoney(1000);
+        vendingMachine.insertItems(new MachineItems(List.of(new Item("상품명", 500, 1))));
+
+        assertThat(vendingMachine.isAvailable()).isTrue();
+    }
+
+    @Test
+    void 구매_가능_확인_남은_투입_금액이_상품_최저_가격보다_작으면_거짓() {
+        VendingMachine vendingMachine = new VendingMachine();
+        vendingMachine.insertMoney(100);
+        vendingMachine.insertItems(new MachineItems(List.of(new Item("상품명", 500, 1))));
+
+        assertThat(vendingMachine.isAvailable()).isFalse();
+    }
+
+    @Test
+    void 구매_가능_확인_남은_상품_수량이_0이면_거짓() {
+        VendingMachine vendingMachine = new VendingMachine();
+        vendingMachine.insertMoney(5000);
+        vendingMachine.insertItems(new MachineItems(List.of(new Item("상품명", 500, 1))));
+        vendingMachine.sellItem("상품명");
+
+        assertThat(vendingMachine.isAvailable()).isFalse();
+    }
 }

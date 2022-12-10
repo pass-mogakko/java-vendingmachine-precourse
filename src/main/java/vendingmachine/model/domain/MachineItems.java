@@ -6,6 +6,7 @@ import static vendingmachine.model.constants.ErrorMessage.ITEMS_TOTAL_QUANTITY_O
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class MachineItems {
@@ -36,13 +37,6 @@ public class MachineItems {
         }
     }
 
-//    public int findMinimumPrice() {
-//        return items.stream()
-//                .mapToInt(Item::getPrice)
-//                .min()
-//                .orElseThrow(NoSuchElementException::new);
-//    }
-
     public int takeOutItem(String itemName) {
         Item item = findByName(itemName);
         item.takeOutOne();
@@ -54,5 +48,12 @@ public class MachineItems {
                 .filter(item -> Objects.equals(item.getName(), itemName))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ITEMS_NOT_FOUND));
+    }
+
+    public int findMinimumPrice() {
+        return items.stream()
+                .mapToInt(Item::getPrice)
+                .min()
+                .orElseThrow(NoSuchElementException::new);
     }
 }

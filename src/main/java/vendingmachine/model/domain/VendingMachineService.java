@@ -35,7 +35,7 @@ public class VendingMachineService {
         vendingMachine.sellItem(itemName);
     }
 
-//    public boolean isMachineAvailable() {
-//        return vendingMachine.isAvailable();
-//    }
+    public boolean isMachineAvailable() {
+        return vendingMachine.isAvailable();
+    }
 }
