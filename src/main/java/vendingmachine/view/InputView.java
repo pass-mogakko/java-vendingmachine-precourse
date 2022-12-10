@@ -1,25 +1,20 @@
 package vendingmachine.view;
 
-import static vendingmachine.view.constants.ErrorMessage.INPUT_EMPTY_ITEM;
-import static vendingmachine.view.constants.ErrorMessage.INPUT_INVALID_ITEM_FORMAT;
-import static vendingmachine.view.constants.ErrorMessage.INPUT_INVALID_VALUE;
-import static vendingmachine.view.constants.ErrorMessage.INPUT_NOT_A_NUMBER;
 import static vendingmachine.view.constants.InputFormat.ITEMS_DELIMITER;
 import static vendingmachine.view.constants.InputFormat.ITEM_PATTERN;
 import static vendingmachine.view.constants.InputFormat.ITEM_PROPERTY_DELIMITER;
-import static vendingmachine.view.constants.InputMessage.INPUT_HOLDING_AMOUNT;
-import static vendingmachine.view.constants.InputMessage.INPUT_INSERT_MONEY_AMOUNT;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import vendingmachine.dto.ItemDTO;
+import vendingmachine.view.constants.ErrorMessage;
 import vendingmachine.view.constants.InputMessage;
 
 public class InputView {
     public int inputHoldingAmount() {
-        System.out.println(INPUT_HOLDING_AMOUNT);
+        System.out.println(InputMessage.INPUT_HOLDING_AMOUNT);
         int holdingAmount = readNumber();
         System.out.println();
         return holdingAmount;
@@ -36,10 +31,10 @@ public class InputView {
 
     private void validateItemsFormat(String[] inputItems) {
         if (inputItems.length == 1 && inputItems[0].isBlank()) {
-            throw new IllegalArgumentException(INPUT_EMPTY_ITEM);
+            throw new IllegalArgumentException(ErrorMessage.EMPTY_ITEM);
         }
         if (!isCorrectFormat(inputItems)) {
-            throw new IllegalArgumentException(INPUT_INVALID_ITEM_FORMAT);
+            throw new IllegalArgumentException(ErrorMessage.INVALID_ITEM_FORMAT);
         }
     }
 
@@ -61,10 +56,24 @@ public class InputView {
     }
 
     public int inputInsertAmount() {
-        System.out.println(INPUT_INSERT_MONEY_AMOUNT);
+        System.out.println(InputMessage.INPUT_INSERT_MONEY_AMOUNT);
         int amount = readNumber();
         System.out.println();
         return amount;
+    }
+
+    public String inputPurchaseItemName() {
+        System.out.println(InputMessage.INPUT_PURCHASE_ITEM_NAME);
+        String itemName = Console.readLine();
+        validateString(itemName);
+        System.out.println();
+        return itemName;
+    }
+
+    private void validateString(String value) {
+        if (value == null || value.isBlank()) {
+            throw new IllegalArgumentException(ErrorMessage.NULL_OR_EMPTY_STRING);
+        }
     }
 
     private int readNumber() {
@@ -75,7 +84,7 @@ public class InputView {
 
     private void validateIntegerToNumber(int value) {
         if (value < 0) {
-            throw new IllegalArgumentException(INPUT_INVALID_VALUE);
+            throw new IllegalArgumentException(ErrorMessage.INVALID_VALUE);
         }
     }
 
@@ -83,7 +92,7 @@ public class InputView {
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INPUT_NOT_A_NUMBER);
+            throw new IllegalArgumentException(ErrorMessage.NOT_A_NUMBER);
         }
     }
 }
