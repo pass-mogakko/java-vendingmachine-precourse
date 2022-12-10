@@ -14,7 +14,7 @@ public class MachineItems {
     }
 
     private void validateItemsTotalQuantity(List<Item> items) {
-        if (sumQuantity(items) == 0) {
+        if (sumQuantity(items) < 1) {
             throw new IllegalArgumentException(ErrorMessage.ITEMS_TOTAL_QUANTITY_OUT_OF_BOUNDS);
         }
     }

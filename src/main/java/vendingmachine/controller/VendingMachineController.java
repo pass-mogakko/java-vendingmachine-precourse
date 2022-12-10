@@ -2,6 +2,7 @@ package vendingmachine.controller;
 
 import java.util.List;
 import vendingmachine.dto.CoinDTO;
+import vendingmachine.dto.ItemDTO;
 import vendingmachine.model.domain.VendingMachineService;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -14,15 +15,21 @@ public class VendingMachineController {
     public void run() {
         initializeMachineCoins();
         showMachineCoins();
+        initializeMachineItems();
     }
 
     private void initializeMachineCoins() {
         int holdingAmount = inputView.inputHoldingAmount();
-        vendingMachineService.insertCoinsByHoldingAmount(holdingAmount);
+        vendingMachineService.insertCoinsToVendingMachine(holdingAmount);
     }
 
     private void showMachineCoins() {
         List<CoinDTO> machineCoins = vendingMachineService.getMachineCoins();
         outputView.printMachineCoins(machineCoins);
+    }
+
+    private void initializeMachineItems() {
+        List<ItemDTO> machineItems = inputView.inputItems();
+        vendingMachineService.insertItemsToVendingMachine(machineItems);
     }
 }

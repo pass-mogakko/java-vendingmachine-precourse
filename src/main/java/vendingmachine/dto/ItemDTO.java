@@ -22,4 +22,13 @@ public class ItemDTO {
     public int getQuantity() {
         return quantity;
     }
+
+    @Override
+    public String toString() {
+        return "ItemDTO{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                '}';
+    }
 }

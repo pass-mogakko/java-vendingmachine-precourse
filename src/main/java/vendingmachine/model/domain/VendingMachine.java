@@ -12,6 +12,10 @@ public class VendingMachine {
         this.machineCoins = coins;
     }
 
+    public void insertItems(MachineItems machineItems) {
+        this.machineItems = machineItems;
+    }
+
     public void insertMoney(int inputMoney) {
         validateInputMoney(inputMoney);
         inputMoney += inputMoney;
