@@ -13,13 +13,14 @@ public class VendingMachineController {
     private final VendingMachineService vendingMachineService = new VendingMachineService();
 
     public void run() {
-        initializeMachineCoins();
+        insertCoins();
         showMachineCoins();
-        initializeMachineItems();
+        insertItems();
         insertMoney();
+        showCurrentAmount();
     }
 
-    private void initializeMachineCoins() {
+    private void insertCoins() {
         int holdingAmount = inputView.inputHoldingAmount();
         vendingMachineService.insertCoinsToVendingMachine(holdingAmount);
     }
@@ -29,13 +30,18 @@ public class VendingMachineController {
         outputView.printMachineCoins(machineCoins);
     }
 
-    private void initializeMachineItems() {
+    private void insertItems() {
         List<ItemDTO> machineItems = inputView.inputItems();
         vendingMachineService.insertItemsToVendingMachine(machineItems);
     }
 
     private void insertMoney() {
-        int insertMoneyAMount = inputView.inputInsertMoneyAmount();
-        vendingMachineService.insertMoneyToVendingMachine(insertMoneyAMount);
+        int insertAmount = inputView.inputInsertAmount();
+        vendingMachineService.insertMoneyToVendingMachine(insertAmount);
+    }
+
+    private void showCurrentAmount() {
+        int currentAmount = vendingMachineService.getInsertedAmount();
+        outputView.printInsertedAmount(currentAmount);
     }
 }

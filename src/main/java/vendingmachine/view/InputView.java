@@ -60,7 +60,7 @@ public class InputView {
                 .allMatch(inputItem -> ITEM_PATTERN.matcher(inputItem).matches());
     }
 
-    public int inputInsertMoneyAmount() {
+    public int inputInsertAmount() {
         System.out.println(INPUT_INSERT_MONEY_AMOUNT);
         int amount = readNumber();
         System.out.println();

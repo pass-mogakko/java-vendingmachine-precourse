@@ -23,7 +23,11 @@ public class VendingMachineService {
         vendingMachine.insertItems(machineItems);
     }
 
-    public void insertMoneyToVendingMachine(int insertMoneyAMount) {
-        vendingMachine.insertMoney(insertMoneyAMount);
+    public void insertMoneyToVendingMachine(int amount) {
+        vendingMachine.insertMoney(amount);
+    }
+
+    public int getInsertedAmount() {
+        return vendingMachine.getInsertedAmount();
     }
 }
