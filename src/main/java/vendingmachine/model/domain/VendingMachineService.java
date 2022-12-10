@@ -30,4 +30,12 @@ public class VendingMachineService {
     public int getInsertedAmount() {
         return vendingMachine.getInsertedAmount();
     }
+
+    public void sellMachineItem(String itemName) {
+        vendingMachine.sellItem(itemName);
+    }
+
+//    public boolean isMachineAvailable() {
+//        return vendingMachine.isAvailable();
+//    }
 }

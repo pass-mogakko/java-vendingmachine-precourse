@@ -34,4 +34,16 @@ public class VendingMachine {
     public int getInsertedAmount() {
         return insertedAmount;
     }
+
+    public void sellItem(String itemName) {
+        int price = machineItems.takeOutItem(itemName);
+        insertedAmount -= price;
+    }
+
+//    public boolean isAvailable() {
+//        if (insertedAmount < machineItems.findMinimumPrice()) {
+//            return false;
+//        }
+//        return machineItems.sumQuantity() != 0;
+//    }
 }

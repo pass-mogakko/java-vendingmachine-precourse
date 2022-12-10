@@ -1,15 +1,18 @@
 package vendingmachine.model.domain;
 
+import static vendingmachine.model.constants.ErrorMessage.ITEM_PRICE_INVALID_MULTIPLE;
+import static vendingmachine.model.constants.ErrorMessage.ITEM_PRICE_OUT_OF_BOUNDS;
+import static vendingmachine.model.constants.ErrorMessage.ITEM_QUANTITY_OUT_OF_BOUNDS;
+import static vendingmachine.model.constants.ErrorMessage.PURCHASE_SOLD_OUT;
 import static vendingmachine.model.domain.Coin.COIN_10;
 import static vendingmachine.model.domain.Coin.COIN_100;
 
 import java.util.Objects;
-import vendingmachine.model.constants.ErrorMessage;
 
 public class Item {
     private final String name;
     private final int price;
-    private final int quantity;
+    private int quantity;
 
     public Item(String name, int price, int quantity) {
         validatePrice(price);
@@ -17,6 +20,28 @@ public class Item {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
+    }
+
+    private void validatePrice(int price) {
+        if ((price % COIN_10.getAmount()) != 0) {
+            throw new IllegalArgumentException(ITEM_PRICE_INVALID_MULTIPLE);
+        }
+        if (price < COIN_100.getAmount()) {
+            throw new IllegalArgumentException(ITEM_PRICE_OUT_OF_BOUNDS);
+        }
+    }
+
+    private void validateQuantity(int quantity) {
+        if (quantity < 0) {
+            throw new IllegalArgumentException(ITEM_QUANTITY_OUT_OF_BOUNDS);
+        }
+    }
+
+    public void takeOutOne() {
+        if (quantity == 0) {
+            throw new IllegalArgumentException(PURCHASE_SOLD_OUT);
+        }
+        quantity--;
     }
 
     public String getName() {
@@ -29,21 +54,6 @@ public class Item {
 
     public int getQuantity() {
         return quantity;
-    }
-
-    private void validatePrice(int price) {
-        if ((price % COIN_10.getAmount()) != 0) {
-            throw new IllegalArgumentException(ErrorMessage.ITEM_PRICE_INVALID_MULTIPLE);
-        }
-        if (price < COIN_100.getAmount()) {
-            throw new IllegalArgumentException(ErrorMessage.ITEM_PRICE_OUT_OF_BOUNDS);
-        }
-    }
-
-    private void validateQuantity(int quantity) {
-        if (quantity < 0) {
-            throw new IllegalArgumentException(ErrorMessage.ITEM_QUANTITY_OUT_OF_BOUNDS);
-        }
     }
 
     @Override
