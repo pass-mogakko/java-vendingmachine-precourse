@@ -42,6 +42,6 @@ public class VendingMachineService {
 
     public List<CoinDTO> getChangeCoins() {
         Map<Coin, Integer> countByChangeCoin = vendingMachine.giveChanges();
-        return DTOConverter.toDTO(countByChangeCoin);
+        return DTOConverter.toDTOWithOutZeroCount(countByChangeCoin);
     }
 }

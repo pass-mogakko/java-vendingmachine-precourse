@@ -18,6 +18,7 @@ public class VendingMachineController {
         insertItems();
         insertMoney();
         purchaseItemUntilAvailable();
+        getChangeCoins();
     }
 
     private void insertCoins() {
@@ -43,13 +44,27 @@ public class VendingMachineController {
     private void purchaseItemUntilAvailable() {
         while (vendingMachineService.isMachineAvailable()) {
             showCurrentAmount();
-            String itemName = inputView.inputPurchaseItemName();
-            vendingMachineService.sellMachineItem(itemName);
+            purchaseItem();
         }
+    }
+
+    private void purchaseItem() {
+        String itemName = inputView.inputPurchaseItemName();
+        vendingMachineService.sellMachineItem(itemName);
+    }
+
+    private void getChangeCoins() {
+        showCurrentAmount();
+        showChangeCoins();
     }
 
     private void showCurrentAmount() {
         int currentAmount = vendingMachineService.getInsertedAmount();
         outputView.printInsertedAmount(currentAmount);
+    }
+
+    private void showChangeCoins() {
+        List<CoinDTO> changeCoins = vendingMachineService.getChangeCoins();
+        outputView.printChangeCoins(changeCoins);
     }
 }
