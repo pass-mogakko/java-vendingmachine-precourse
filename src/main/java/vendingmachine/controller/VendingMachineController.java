@@ -1,18 +1,28 @@
 package vendingmachine.controller;
 
-import vendingmachine.model.domain.MachineCoins;
-import vendingmachine.model.domain.MachineCoinsMaker;
+import java.util.List;
+import vendingmachine.dto.CoinDTO;
+import vendingmachine.model.domain.VendingMachineService;
 import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
-    public static final InputView inputView = new InputView();
+    private final InputView inputView = new InputView();
+    private final OutputView outputView = new OutputView();
+    private final VendingMachineService vendingMachineService = new VendingMachineService();
 
     public void run() {
-        System.out.println(makeMachineCoins());
+        initializeMachineCoins();
+        showMachineCoins();
     }
 
-    private MachineCoins makeMachineCoins() {
+    private void initializeMachineCoins() {
         int holdingAmount = inputView.inputHoldingAmount();
-        return new MachineCoins(new MachineCoinsMaker(), holdingAmount);
+        vendingMachineService.insertCoinsByHoldingAmount(holdingAmount);
+    }
+
+    private void showMachineCoins() {
+        List<CoinDTO> machineCoins = vendingMachineService.getMachineCoins();
+        outputView.printMachineCoins(machineCoins);
     }
 }

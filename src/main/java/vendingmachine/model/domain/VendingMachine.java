@@ -1,20 +1,24 @@
 package vendingmachine.model.domain;
 
+import java.util.Map;
 import vendingmachine.model.constants.ErrorMessage;
 
 public class VendingMachine {
-    private final MachineCoins machineCoins;
-    private final MachineItems machineItems;
     private final int inputMoney = 0;
+    private MachineCoins machineCoins;
+    private MachineItems machineItems;
 
-    public VendingMachine(MachineCoins machineCoins, MachineItems machineItems) {
-        this.machineCoins = machineCoins;
-        this.machineItems = machineItems;
+    public void insertCoins(MachineCoins coins) {
+        this.machineCoins = coins;
     }
 
     public void insertMoney(int inputMoney) {
         validateInputMoney(inputMoney);
         inputMoney += inputMoney;
+    }
+
+    public Map<Coin, Integer> getMachineCoinsCount() {
+        return machineCoins.getCountByCoin();
     }
 
     private void validateInputMoney(int inputMoney) {
