@@ -1,6 +1,7 @@
 package vendingmachine.model.domain;
 
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.Map;
 
 public class MachineCoins {
@@ -12,6 +13,28 @@ public class MachineCoins {
 
     public Map<Coin, Integer> getCountByCoin() {
         return Collections.unmodifiableMap(countByCoin);
+    }
+
+    public Map<Coin, Integer> giveChangeCoins(int changeAmount) {
+        Map<Coin, Integer> countByChangeCoin = new EnumMap<>(Coin.class);
+        int remainingAmount = changeAmount;
+        for (Coin coin : countByCoin.keySet()) {
+            int maxCount = computeMaxCountForAmount(coin, remainingAmount);
+            takeOutCoinForChange(coin, maxCount);
+            countByChangeCoin.put(coin, maxCount);
+            remainingAmount -= (coin.getAmount() * maxCount);
+        }
+        return countByChangeCoin;
+    }
+
+    private void takeOutCoinForChange(Coin coin, int count) {
+        countByCoin.put(coin, countByCoin.get(coin) - count);
+    }
+
+    private int computeMaxCountForAmount(Coin coin, int remainingAmount) {
+        int maxMultipleCount = remainingAmount / coin.getAmount();
+        int holdingCount = countByCoin.get(coin);
+        return Math.min(maxMultipleCount, holdingCount);
     }
 
     @Override

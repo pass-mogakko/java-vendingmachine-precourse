@@ -35,15 +35,19 @@ public class VendingMachine {
         return insertedAmount;
     }
 
-    public void sellItem(String itemName) {
-        int price = machineItems.takeOutItem(itemName);
-        insertedAmount -= price;
-    }
-
     public boolean isAvailable() {
         if (insertedAmount < machineItems.findMinimumPrice()) {
             return false;
         }
         return machineItems.sumQuantity() != 0;
+    }
+
+    public void sellItem(String itemName) {
+        int price = machineItems.takeOutItem(itemName);
+        insertedAmount -= price;
+    }
+
+    public Map<Coin, Integer> giveChanges() {
+        return machineCoins.giveChangeCoins(insertedAmount);
     }
 }

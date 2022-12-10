@@ -1,6 +1,7 @@
 package vendingmachine.model.domain;
 
 import java.util.List;
+import java.util.Map;
 import vendingmachine.controller.DTOConverter;
 import vendingmachine.dto.CoinDTO;
 import vendingmachine.dto.ItemDTO;
@@ -37,5 +38,10 @@ public class VendingMachineService {
 
     public boolean isMachineAvailable() {
         return vendingMachine.isAvailable();
+    }
+
+    public List<CoinDTO> getChangeCoins() {
+        Map<Coin, Integer> countByChangeCoin = vendingMachine.giveChanges();
+        return DTOConverter.toDTO(countByChangeCoin);
     }
 }
