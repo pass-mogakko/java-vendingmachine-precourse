@@ -2,7 +2,7 @@ package vendingmachine.controller.util;
 
 import java.util.function.Consumer;
 
-public class ExceptionHandler {
+public class ExceptionHandlingUtils {
     public static void retryForIllegalArgument(Runnable runnable, Consumer<String> exceptionMessageHandling) {
         while (true) {
             try {

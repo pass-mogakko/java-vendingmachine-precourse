@@ -1,10 +1,15 @@
-package vendingmachine.model.domain;
+package vendingmachine.model;
 
 import java.util.List;
 import java.util.Map;
-import vendingmachine.controller.DTOConverter;
 import vendingmachine.dto.CoinDTO;
 import vendingmachine.dto.ItemDTO;
+import vendingmachine.model.domain.Coin;
+import vendingmachine.model.domain.Item;
+import vendingmachine.model.domain.MachineCoins;
+import vendingmachine.model.domain.MachineCoinsMaker;
+import vendingmachine.model.domain.MachineItems;
+import vendingmachine.model.domain.VendingMachine;
 
 public class VendingMachineService {
     private final VendingMachine vendingMachine = new VendingMachine();

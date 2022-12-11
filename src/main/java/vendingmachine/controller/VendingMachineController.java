@@ -1,10 +1,10 @@
 package vendingmachine.controller;
 
 import java.util.List;
-import vendingmachine.controller.util.ExceptionHandler;
+import vendingmachine.controller.util.ExceptionHandlingUtils;
 import vendingmachine.dto.CoinDTO;
 import vendingmachine.dto.ItemDTO;
-import vendingmachine.model.domain.VendingMachineService;
+import vendingmachine.model.VendingMachineService;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -20,10 +20,10 @@ public class VendingMachineController {
     }
 
     private void initializeVendingMachine() {
-        ExceptionHandler.retryForIllegalArgument(this::insertCoins, outputView::printErrorMessage);
+        ExceptionHandlingUtils.retryForIllegalArgument(this::insertCoins, outputView::printErrorMessage);
         showMachineCoins();
-        ExceptionHandler.retryForIllegalArgument(this::insertItems, outputView::printErrorMessage);
-        ExceptionHandler.retryForIllegalArgument(this::insertMoney, outputView::printErrorMessage);
+        ExceptionHandlingUtils.retryForIllegalArgument(this::insertItems, outputView::printErrorMessage);
+        ExceptionHandlingUtils.retryForIllegalArgument(this::insertMoney, outputView::printErrorMessage);
     }
 
     private void insertCoins() {
@@ -49,7 +49,7 @@ public class VendingMachineController {
     private void repeatPurchasingItems() {
         while (vendingMachineService.isMachineAvailable()) {
             showCurrentAmount();
-            ExceptionHandler.retryForIllegalArgument(this::purchaseItem, outputView::printErrorMessage);
+            ExceptionHandlingUtils.retryForIllegalArgument(this::purchaseItem, outputView::printErrorMessage);
         }
     }
 

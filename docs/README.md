@@ -140,37 +140,43 @@
     - VendingMachineController
         - 프로그램 진행 순서에 맞게 model 로직과 view 로직을 중재하는 클래스
     - util
-        - InputErrorInterceptor
-            - 잘못된 값 입력에 대한 예외 발생 시 해당 부분부터 다시 실행하도록 하는 클래스
-
+        - ExceptionHandlingUtils
+            - 예외 처리 관련 유틸리티 메소드를 제공하는 클래스
+          
 - model
-    - Coin
-        - 동전 하나의 이름과 값을 나타내는 Enum 클래스
-    - Item
-        - 상품 하나의 이름, 가격, 수량을 나타내는 클래스
-    - MachineCoinsMaker
-        - 전달받은 금액을 이용해 생성한 동전 목록을 생성하는 클래스
-    - MachineCoins
-        - 자판기가 보유한 동전 목록을 가지는 일급 콜렉션 클래스
-        - MachineCoinsMaker 객체를 주입받아 생성한다.
-    - MachineItems
-        - 자판기가 보유한 상품 목록을 가지는 일급 콜렉션 클래스
-        - 상품 저장, 수량 변경, 상품 금액 확인의 기능을 제공한다.
-    - ChangeCoins
-        - 자판기가 반환할 동전 목록을 가지는 일급 콜렉션 클래스
-        - 전달받은 동전 목록, 잔돈 금액을 이용해 반환할 동전 목록을 생성한다.
-    - VendingMachine
-        - 자판기 기능을 수행하는 클래스
-        - MachineItems, MachineCoins 객체와 "잔돈 금액"을 멤버 변수로 관리한다.
-        - 상품 구매 시 MachineItems, "잔돈 금액"의 상태를 변경한다.
-        - MachineItems, "잔돈 금액"의 상태에 따라 상품 구매 반복 여부를 결정한다.
-        - 잔돈 반환 시 MachineCoins, "잔돈 금액"을 이용해 ChangeCoins 객체를 생성해 반환한다.
+    - domain
+        - Coin
+            - 동전 하나의 이름과 값을 나타내는 Enum 클래스
+        - Item
+            - 상품 하나의 이름, 가격, 수량을 나타내는 클래스
+        - MachineCoinsMaker
+            - 전달받은 금액을 이용해 생성한 동전 목록을 생성하는 클래스
+        - MachineCoins
+            - 자판기가 보유한 동전 목록을 가지는 일급 콜렉션 클래스
+            - MachineCoinsMaker 객체를 주입받아 생성한다.
+            - 전달받은 동전 목록, 잔돈 금액을 이용해 반환할 동전 목록을 생성한다.
+        - MachineItems
+            - 자판기가 보유한 상품 목록을 가지는 일급 콜렉션 클래스
+            - 상품 저장, 수량 변경, 상품 금액 확인의 기능을 제공한다.
+        - VendingMachine
+            - 자판기 기능을 수행하는 클래스
+            - MachineItems, MachineCoins 객체와 "잔돈 금액"을 멤버 변수로 관리한다.
+            - 상품 구매 시 MachineItems, "잔돈 금액"의 상태를 변경한다.
+            - MachineItems, "잔돈 금액"의 상태에 따라 상품 구매 반복 여부를 결정한다.
+            - 잔돈 반환 시 MachineCoins, "잔돈 금액"을 이용해 잔돈 동전 목록을 생성해 반환한다.
+    - VendingMachineService
+        - 자판기를 관리하는 서비스 클래스
+        - 자판기의 기능을 호출하고, 필요에 따라 정보를 컨트롤러에 필요한 형식의 객체로 변환해 반환한다.
+    - DTOConverter
+        - 도메인 객체와 DTO 객체를 변환하는 클래스
 
 - view
     - OutputView
-        - 결과 안내 관련 상호작용 담당
+        - 결과 안내 관련 상호작용 담당 클래스
     - InputView
-        - 사용자 입력값 상호작용 담당
+        - 사용자 입력값 상호작용 담당 클래스
+    - InputValidator
+        - 입력값을 검증하는 정적 메소드를 제공하는 클래스
 
 ## ♻️ 리팩토링 검토 목록
 

@@ -1,4 +1,4 @@
-package vendingmachine.controller;
+package vendingmachine.model;
 
 import java.util.List;
 import java.util.Map;
