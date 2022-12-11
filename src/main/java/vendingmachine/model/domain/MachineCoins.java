@@ -5,42 +5,42 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class MachineCoins {
-    private final Map<Coin, Integer> countByCoin;
+    private final Map<Coin, Integer> quantityByCoin;
 
     public MachineCoins(CoinsMaker coinsMaker, int holdingAmount) {
-        this.countByCoin = coinsMaker.make(holdingAmount);
+        this.quantityByCoin = coinsMaker.make(holdingAmount);
     }
 
-    public Map<Coin, Integer> getCountByCoin() {
-        return Collections.unmodifiableMap(countByCoin);
+    public Map<Coin, Integer> getQuantityByCoin() {
+        return Collections.unmodifiableMap(quantityByCoin);
     }
 
     public Map<Coin, Integer> giveChangeCoins(int changeAmount) {
-        Map<Coin, Integer> countByChangeCoin = new EnumMap<>(Coin.class);
+        Map<Coin, Integer> quantityByChangeCoin = new EnumMap<>(Coin.class);
         int remainingAmount = changeAmount;
-        for (Coin coin : countByCoin.keySet()) {
-            int maxCount = computeMaxCountForAmount(coin, remainingAmount);
-            takeOutCoin(coin, maxCount);
-            countByChangeCoin.put(coin, maxCount);
-            remainingAmount -= (coin.getAmount() * maxCount);
+        for (Coin coin : quantityByCoin.keySet()) {
+            int maxQuantity = computeMaxQuantityForAmount(coin, remainingAmount);
+            takeOutCoin(coin, maxQuantity);
+            quantityByChangeCoin.put(coin, maxQuantity);
+            remainingAmount -= (coin.getAmount() * maxQuantity);
         }
-        return countByChangeCoin;
+        return quantityByChangeCoin;
     }
 
-    private void takeOutCoin(Coin coin, int count) {
-        countByCoin.put(coin, countByCoin.get(coin) - count);
+    private void takeOutCoin(Coin coin, int quantity) {
+        quantityByCoin.put(coin, quantityByCoin.get(coin) - quantity);
     }
 
-    private int computeMaxCountForAmount(Coin coin, int remainingAmount) {
-        int maxMultipleCount = remainingAmount / coin.getAmount();
-        int holdingCount = countByCoin.get(coin);
-        return Math.min(maxMultipleCount, holdingCount);
+    private int computeMaxQuantityForAmount(Coin coin, int remainingAmount) {
+        int multipleQuantity = remainingAmount / coin.getAmount();
+        int holdingCount = quantityByCoin.get(coin);
+        return Math.min(multipleQuantity, holdingCount);
     }
 
     @Override
     public String toString() {
         return "MachineCoins{" +
-                "countByCoin=" + countByCoin +
+                "countByCoin=" + quantityByCoin +
                 '}';
     }
 }

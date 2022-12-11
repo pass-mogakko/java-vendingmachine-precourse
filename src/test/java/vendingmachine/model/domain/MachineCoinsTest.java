@@ -20,7 +20,7 @@ class MachineCoinsTest {
 
         assertThat(countByChangeCoin.values())
                 .containsExactly(1, 2, 0, 1);
-        assertThat(machineCoins.getCountByCoin().values())
+        assertThat(machineCoins.getQuantityByCoin().values())
                 .containsExactly(0, 1, 0, 2);
     }
 }

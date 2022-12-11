@@ -15,18 +15,18 @@ public class DTOConverter {
                         item -> item.getQuantity()));
     }
 
-    public static List<CoinDTO> toDTO(Map<Coin, Integer> countByCoins) {
-        return countByCoins.keySet()
+    public static List<CoinDTO> toDTO(Map<Coin, Integer> quantityByCoin) {
+        return quantityByCoin.keySet()
                 .stream()
-                .map(coin -> new CoinDTO(coin.getAmount(), countByCoins.get(coin)))
+                .map(coin -> new CoinDTO(coin.getAmount(), quantityByCoin.get(coin)))
                 .collect(Collectors.toList());
     }
 
-    public static List<CoinDTO> toDTOWithOutZeroCount(Map<Coin, Integer> countByCoins) {
-        return countByCoins.keySet()
+    public static List<CoinDTO> toDTOWithOutZeroValue(Map<Coin, Integer> quantityByCoin) {
+        return quantityByCoin.keySet()
                 .stream()
-                .filter(coin -> countByCoins.get(coin) > 0)
-                .map(coin -> new CoinDTO(coin.getAmount(), countByCoins.get(coin)))
+                .filter(coin -> quantityByCoin.get(coin) > 0)
+                .map(coin -> new CoinDTO(coin.getAmount(), quantityByCoin.get(coin)))
                 .collect(Collectors.toList());
     }
 }

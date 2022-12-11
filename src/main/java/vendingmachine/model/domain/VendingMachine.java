@@ -17,18 +17,18 @@ public class VendingMachine {
     }
 
     public void insertMoney(int insertAmount) {
-        validateInputAmount(insertAmount);
+        validateInsertAmount(insertAmount);
         insertedAmount += insertAmount;
     }
 
-    private void validateInputAmount(int amount) {
+    private void validateInsertAmount(int amount) {
         if (amount < 0) {
             throw new IllegalArgumentException(ErrorMessage.INPUT_MONEY_OUT_OF_BOUNDS);
         }
     }
 
-    public Map<Coin, Integer> getMachineCoinsCount() {
-        return machineCoins.getCountByCoin();
+    public Map<Coin, Integer> getMachineCoinsQuantity() {
+        return machineCoins.getQuantityByCoin();
     }
 
     public int getInsertedAmount() {
@@ -47,7 +47,7 @@ public class VendingMachine {
         insertedAmount -= price;
     }
 
-    public Map<Coin, Integer> giveChanges() {
+    public Map<Coin, Integer> giveChangeCoins() {
         return machineCoins.giveChangeCoins(insertedAmount);
     }
 }

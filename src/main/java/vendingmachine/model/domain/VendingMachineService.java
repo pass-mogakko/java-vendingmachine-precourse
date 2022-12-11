@@ -29,12 +29,12 @@ public class VendingMachineService {
     }
 
     public List<CoinDTO> getMachineCoins() {
-        return DTOConverter.toDTO(vendingMachine.getMachineCoinsCount());
+        return DTOConverter.toDTO(vendingMachine.getMachineCoinsQuantity());
     }
 
     public List<CoinDTO> getChangeCoins() {
-        Map<Coin, Integer> countByChangeCoin = vendingMachine.giveChanges();
-        return DTOConverter.toDTOWithOutZeroCount(countByChangeCoin);
+        Map<Coin, Integer> quantityByChangeCoin = vendingMachine.giveChangeCoins();
+        return DTOConverter.toDTOWithOutZeroValue(quantityByChangeCoin);
     }
 
     public int getInsertedAmount() {
