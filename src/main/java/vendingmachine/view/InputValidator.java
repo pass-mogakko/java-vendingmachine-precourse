@@ -1,6 +1,6 @@
 package vendingmachine.view;
 
-import static vendingmachine.constant.ErrorMessage.*;
+import static vendingmachine.util.ErrorMessage.*;
 
 class InputValidator {
 
