@@ -8,12 +8,13 @@ public class InputView {
 
     public static String readMachineMoney() {
         System.out.println(MACHINE_MONEY_MESSAGE);
-        return Console.readLine();
+        String input = Console.readLine();
+        InputValidator.validateMachineMoney(input);
+        return input;
     }
 
-    class Message {
+    static class Message {
         static final String MACHINE_MONEY_MESSAGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
-
     }
 
 }
