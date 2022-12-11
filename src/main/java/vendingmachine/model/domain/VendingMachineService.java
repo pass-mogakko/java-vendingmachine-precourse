@@ -9,15 +9,15 @@ import vendingmachine.dto.ItemDTO;
 public class VendingMachineService {
     private final VendingMachine vendingMachine = new VendingMachine();
 
-    public void insertCoinsToVendingMachine(int holdingAmount) {
+    public void setCoinsToVendingMachine(int holdingAmount) {
         MachineCoins machineCoins = new MachineCoins(new MachineCoinsMaker(), holdingAmount);
-        vendingMachine.insertCoins(machineCoins);
+        vendingMachine.setCoins(machineCoins);
     }
 
-    public void insertItemsToVendingMachine(List<ItemDTO> inputItems) {
+    public void setItemsToVendingMachine(List<ItemDTO> inputItems) {
         Map<Item, Integer> quantityByItem = DTOConverter.toEntity(inputItems);
         MachineItems machineItems = new MachineItems(quantityByItem);
-        vendingMachine.insertItems(machineItems);
+        vendingMachine.setItems(machineItems);
     }
 
     public void insertMoneyToVendingMachine(int amount) {

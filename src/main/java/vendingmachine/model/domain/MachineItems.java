@@ -1,7 +1,6 @@
 package vendingmachine.model.domain;
 
 import static vendingmachine.model.constants.ErrorMessage.ITEMS_NOT_FOUND;
-import static vendingmachine.model.constants.ErrorMessage.ITEMS_TOTAL_QUANTITY_OUT_OF_BOUNDS;
 import static vendingmachine.model.constants.ErrorMessage.ITEM_QUANTITY_OUT_OF_BOUNDS;
 
 import java.util.Map;
@@ -13,20 +12,17 @@ public class MachineItems {
     private final Map<Item, Integer> quantityByItem;
 
     public MachineItems(Map<Item, Integer> quantityByItem) {
+        validateQuantityByItem(quantityByItem);
         this.quantityByItem = quantityByItem;
-        validateItemsTotalQuantity();
     }
 
-    private void validateItemsTotalQuantity() {
-        if (hasInvalidQuantity()) {
+    private void validateQuantityByItem(Map<Item, Integer> quantityByItem) {
+        if (hasInvalidQuantity(quantityByItem)) {
             throw new IllegalArgumentException(ITEM_QUANTITY_OUT_OF_BOUNDS);
         }
-        if (sumQuantity() < 1) {
-            throw new IllegalArgumentException(ITEMS_TOTAL_QUANTITY_OUT_OF_BOUNDS);
-        }
     }
 
-    private boolean hasInvalidQuantity() {
+    private boolean hasInvalidQuantity(Map<Item, Integer> quantityByItem) {
         return quantityByItem.values()
                 .stream()
                 .anyMatch(quantity -> quantity < 0);
@@ -66,5 +62,9 @@ public class MachineItems {
                 .mapToInt(Item::getPrice)
                 .min()
                 .orElseThrow(NoSuchElementException::new);
+    }
+
+    public boolean isEmpty() {
+        return quantityByItem.isEmpty();
     }
 }

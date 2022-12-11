@@ -28,7 +28,7 @@ public class VendingMachineController {
 
     private void insertCoins() {
         int holdingAmount = inputView.inputHoldingAmount();
-        vendingMachineService.insertCoinsToVendingMachine(holdingAmount);
+        vendingMachineService.setCoinsToVendingMachine(holdingAmount);
     }
 
     private void showMachineCoins() {
@@ -38,7 +38,7 @@ public class VendingMachineController {
 
     private void insertItems() {
         List<ItemDTO> machineItems = inputView.inputItems();
-        vendingMachineService.insertItemsToVendingMachine(machineItems);
+        vendingMachineService.setItemsToVendingMachine(machineItems);
     }
 
     private void insertMoney() {
@@ -59,7 +59,7 @@ public class VendingMachineController {
     }
 
     private void purchaseItem() {
-        String itemName = inputView.inputPurchaseItemName();
+        String itemName = InputView.inputPurchaseItemName();
         vendingMachineService.sellMachineItem(itemName);
     }
 
