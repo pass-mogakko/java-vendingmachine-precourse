@@ -1,6 +1,7 @@
 package vendingmachine.controller;
 
 import java.util.List;
+import vendingmachine.controller.util.ExceptionHandler;
 import vendingmachine.dto.CoinDTO;
 import vendingmachine.dto.ItemDTO;
 import vendingmachine.model.domain.VendingMachineService;
@@ -13,12 +14,16 @@ public class VendingMachineController {
     private final VendingMachineService vendingMachineService = new VendingMachineService();
 
     public void run() {
-        insertCoins();
-        showMachineCoins();
-        insertItems();
-        insertMoney();
-        purchaseItemUntilAvailable();
+        initializeVendingMachine();
+        repeatPurchasingItems();
         getChangeCoins();
+    }
+
+    private void initializeVendingMachine() {
+        ExceptionHandler.retryForIllegalArgument(this::insertCoins, outputView::printErrorMessage);
+        showMachineCoins();
+        ExceptionHandler.retryForIllegalArgument(this::insertItems, outputView::printErrorMessage);
+        ExceptionHandler.retryForIllegalArgument(this::insertMoney, outputView::printErrorMessage);
     }
 
     private void insertCoins() {
@@ -41,11 +46,16 @@ public class VendingMachineController {
         vendingMachineService.insertMoneyToVendingMachine(insertAmount);
     }
 
-    private void purchaseItemUntilAvailable() {
+    private void repeatPurchasingItems() {
         while (vendingMachineService.isMachineAvailable()) {
             showCurrentAmount();
-            purchaseItem();
+            ExceptionHandler.retryForIllegalArgument(this::purchaseItem, outputView::printErrorMessage);
         }
+    }
+
+    private void showCurrentAmount() {
+        int currentAmount = vendingMachineService.getInsertedAmount();
+        outputView.printInsertedAmount(currentAmount);
     }
 
     private void purchaseItem() {
@@ -56,11 +66,6 @@ public class VendingMachineController {
     private void getChangeCoins() {
         showCurrentAmount();
         showChangeCoins();
-    }
-
-    private void showCurrentAmount() {
-        int currentAmount = vendingMachineService.getInsertedAmount();
-        outputView.printInsertedAmount(currentAmount);
     }
 
     private void showChangeCoins() {
