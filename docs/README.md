@@ -142,7 +142,7 @@
     - util
         - ExceptionHandlingUtils
             - 예외 처리 관련 유틸리티 메소드를 제공하는 클래스
-          
+
 - model
     - domain
         - Coin
@@ -177,6 +177,8 @@
         - 사용자 입력값 상호작용 담당 클래스
     - InputValidator
         - 입력값을 검증하는 정적 메소드를 제공하는 클래스
+    - InputParser
+        - 입력값을 변환하는 정적 메소드를 제공하는 클래스
 
 ## ♻️ 리팩토링 검토 목록
 
