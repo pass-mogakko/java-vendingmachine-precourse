@@ -24,7 +24,6 @@ public class InputView {
         System.out.println(InputMessage.INPUT_ITEMS);
         String readLine = Console.readLine();
         String[] inputItems = readLine.split(ITEMS_DELIMITER);
-        validateItemsFormat(inputItems);
         System.out.println();
         return parseItems(inputItems);
     }
@@ -38,21 +37,38 @@ public class InputView {
         }
     }
 
-    private List<ItemDTO> parseItems(String[] inputItems) {
+    private boolean isCorrectFormat(String[] inputItems) {
         return Arrays.stream(inputItems)
+                .allMatch(inputItem -> ITEM_PATTERN.matcher(inputItem).matches());
+    }
+
+    private void validateDuplicatedItemName(List<ItemDTO> items) {
+        if (hasDuplicatedItemName(items)) {
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATED_ITEM_NAME);
+        }
+    }
+
+    private boolean hasDuplicatedItemName(List<ItemDTO> items) {
+        int removeDuplicatedSize = items.stream()
+                .map(item -> item.getName())
+                .collect(Collectors.toSet())
+                .size();
+        return removeDuplicatedSize != items.size();
+    }
+
+    private List<ItemDTO> parseItems(String[] inputItems) {
+        validateItemsFormat(inputItems);
+        List<ItemDTO> parsedItems = Arrays.stream(inputItems)
                 .map(this::parseItem)
                 .collect(Collectors.toList());
+        validateDuplicatedItemName(parsedItems);
+        return parsedItems;
     }
 
     private ItemDTO parseItem(String inputItem) {
         String item = inputItem.substring(1, inputItem.length() - 1);
         String[] properties = item.split(ITEM_PROPERTY_DELIMITER);
         return new ItemDTO(properties[0], toInteger(properties[1]), toInteger(properties[2]));
-    }
-
-    private boolean isCorrectFormat(String[] inputItems) {
-        return Arrays.stream(inputItems)
-                .allMatch(inputItem -> ITEM_PATTERN.matcher(inputItem).matches());
     }
 
     public int inputInsertAmount() {

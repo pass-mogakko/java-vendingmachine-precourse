@@ -15,8 +15,8 @@ public class VendingMachineService {
     }
 
     public void insertItemsToVendingMachine(List<ItemDTO> inputItems) {
-        List<Item> items = DTOConverter.toEntity(inputItems);
-        MachineItems machineItems = new MachineItems(items);
+        Map<Item, Integer> quantityByItem = DTOConverter.toEntity(inputItems);
+        MachineItems machineItems = new MachineItems(quantityByItem);
         vendingMachine.insertItems(machineItems);
     }
 

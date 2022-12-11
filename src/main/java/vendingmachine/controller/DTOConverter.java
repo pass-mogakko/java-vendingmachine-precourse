@@ -9,10 +9,10 @@ import vendingmachine.model.domain.Coin;
 import vendingmachine.model.domain.Item;
 
 public class DTOConverter {
-    public static List<Item> toEntity(List<ItemDTO> itemDTOs) {
+    public static Map<Item, Integer> toEntity(List<ItemDTO> itemDTOs) {
         return itemDTOs.stream()
-                .map(itemDTO -> new Item(itemDTO.getName(), itemDTO.getPrice(), itemDTO.getQuantity()))
-                .collect(Collectors.toList());
+                .collect(Collectors.toMap(item -> new Item(item.getName(), item.getPrice()),
+                        item -> item.getQuantity()));
     }
 
     public static List<CoinDTO> toDTO(Map<Coin, Integer> countByCoins) {
