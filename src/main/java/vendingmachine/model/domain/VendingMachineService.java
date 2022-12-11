@@ -14,10 +14,6 @@ public class VendingMachineService {
         vendingMachine.insertCoins(machineCoins);
     }
 
-    public List<CoinDTO> getMachineCoins() {
-        return DTOConverter.toDTO(vendingMachine.getMachineCoinsCount());
-    }
-
     public void insertItemsToVendingMachine(List<ItemDTO> inputItems) {
         List<Item> items = DTOConverter.toEntity(inputItems);
         MachineItems machineItems = new MachineItems(items);
@@ -28,20 +24,24 @@ public class VendingMachineService {
         vendingMachine.insertMoney(amount);
     }
 
-    public int getInsertedAmount() {
-        return vendingMachine.getInsertedAmount();
-    }
-
     public void sellMachineItem(String itemName) {
         vendingMachine.sellItem(itemName);
     }
 
-    public boolean isMachineAvailable() {
-        return vendingMachine.isAvailable();
+    public List<CoinDTO> getMachineCoins() {
+        return DTOConverter.toDTO(vendingMachine.getMachineCoinsCount());
     }
 
     public List<CoinDTO> getChangeCoins() {
         Map<Coin, Integer> countByChangeCoin = vendingMachine.giveChanges();
         return DTOConverter.toDTOWithOutZeroCount(countByChangeCoin);
+    }
+
+    public int getInsertedAmount() {
+        return vendingMachine.getInsertedAmount();
+    }
+
+    public boolean isMachineAvailable() {
+        return vendingMachine.isAvailable();
     }
 }

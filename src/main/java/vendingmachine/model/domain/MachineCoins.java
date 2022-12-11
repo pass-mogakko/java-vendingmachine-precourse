@@ -20,14 +20,14 @@ public class MachineCoins {
         int remainingAmount = changeAmount;
         for (Coin coin : countByCoin.keySet()) {
             int maxCount = computeMaxCountForAmount(coin, remainingAmount);
-            takeOutCoinForChange(coin, maxCount);
+            takeOutCoin(coin, maxCount);
             countByChangeCoin.put(coin, maxCount);
             remainingAmount -= (coin.getAmount() * maxCount);
         }
         return countByChangeCoin;
     }
 
-    private void takeOutCoinForChange(Coin coin, int count) {
+    private void takeOutCoin(Coin coin, int count) {
         countByCoin.put(coin, countByCoin.get(coin) - count);
     }
 

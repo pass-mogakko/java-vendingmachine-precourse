@@ -24,17 +24,17 @@ public class MachineItems {
         }
     }
 
-    public int sumQuantity() {
-        return items.stream()
-                .map(Item::getQuantity)
-                .reduce(0, Integer::sum);
-    }
-
     private void validateDuplicatedItemName() {
         int removeDuplicatedSize = new HashSet<>(items).size();
         if (removeDuplicatedSize < items.size()) {
             throw new IllegalArgumentException(ITEMS_DUPLICATED_NAMES);
         }
+    }
+
+    public int sumQuantity() {
+        return items.stream()
+                .map(Item::getQuantity)
+                .reduce(0, Integer::sum);
     }
 
     public int takeOutItem(String itemName) {
