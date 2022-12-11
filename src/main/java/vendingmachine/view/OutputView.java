@@ -1,6 +1,7 @@
 package vendingmachine.view;
 
 import static vendingmachine.view.constants.OutputFormat.COUNT_BY_COIN;
+import static vendingmachine.view.constants.OutputFormat.ERROR;
 import static vendingmachine.view.constants.OutputFormat.INSERTED_AMOUNT;
 
 import java.util.List;
@@ -27,6 +28,10 @@ public class OutputView {
         changeCoins.stream()
                 .filter(coin -> coin.getCount() > 0)
                 .forEach(this::printCountByCoin);
+    }
+
+    public void printErrorMessage(String errorMessage) {
+        System.out.printf(ERROR, errorMessage);
     }
 
     private void printCountByCoin(CoinDTO coin) {
