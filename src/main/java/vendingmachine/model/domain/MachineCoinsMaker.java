@@ -26,6 +26,9 @@ public class MachineCoinsMaker implements CoinsMaker {
         if (holdingAmount < 0) {
             throw new IllegalArgumentException(ErrorMessage.HOLDING_AMOUNT_OUT_OF_BOUNDS);
         }
+        if ((holdingAmount % Coin.getMinimumAmount()) != 0) {
+            throw new IllegalArgumentException(ErrorMessage.HOLDING_AMOUNT_INVALID_MULTIPLE);
+        }
     }
 
     private void setCountByCoin(Map<Coin, Integer> countByCoin, int holdingAmount) {

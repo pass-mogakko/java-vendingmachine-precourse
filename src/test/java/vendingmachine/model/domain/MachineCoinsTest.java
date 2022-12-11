@@ -11,7 +11,6 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 class MachineCoinsTest {
-
     @Test
     void 잔돈_반환_성공() {
         MachineCoins machineCoins = new MachineCoins(
