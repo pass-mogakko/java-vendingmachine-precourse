@@ -1,7 +1,6 @@
 package vendingmachine.view;
 
 import static vendingmachine.view.constants.InputFormat.ITEMS_DELIMITER;
-import static vendingmachine.view.constants.InputFormat.ITEM_PATTERN;
 import static vendingmachine.view.constants.InputFormat.ITEM_PROPERTY_DELIMITER;
 
 import camp.nextstep.edu.missionutils.Console;
@@ -13,6 +12,14 @@ import vendingmachine.view.constants.ErrorMessage;
 import vendingmachine.view.constants.InputMessage;
 
 public class InputView {
+    public static String inputPurchaseItemName() {
+        System.out.println(InputMessage.INPUT_PURCHASE_ITEM_NAME);
+        String itemName = Console.readLine();
+        InputValidator.validateString(itemName);
+        System.out.println();
+        return itemName;
+    }
+
     public int inputHoldingAmount() {
         System.out.println(InputMessage.INPUT_HOLDING_AMOUNT);
         int holdingAmount = readNumber();
@@ -28,49 +35,6 @@ public class InputView {
         return parseItems(inputItems);
     }
 
-    private void validateItemsFormat(String[] inputItems) {
-        if (inputItems.length == 1 && inputItems[0].isBlank()) {
-            throw new IllegalArgumentException(ErrorMessage.EMPTY_ITEM);
-        }
-        if (!isCorrectFormat(inputItems)) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_ITEM_FORMAT);
-        }
-    }
-
-    private boolean isCorrectFormat(String[] inputItems) {
-        return Arrays.stream(inputItems)
-                .allMatch(inputItem -> ITEM_PATTERN.matcher(inputItem).matches());
-    }
-
-    private void validateDuplicatedItemName(List<ItemDTO> items) {
-        if (hasDuplicatedItemName(items)) {
-            throw new IllegalArgumentException(ErrorMessage.DUPLICATED_ITEM_NAME);
-        }
-    }
-
-    private boolean hasDuplicatedItemName(List<ItemDTO> items) {
-        int removeDuplicatedSize = items.stream()
-                .map(item -> item.getName())
-                .collect(Collectors.toSet())
-                .size();
-        return removeDuplicatedSize != items.size();
-    }
-
-    private List<ItemDTO> parseItems(String[] inputItems) {
-        validateItemsFormat(inputItems);
-        List<ItemDTO> parsedItems = Arrays.stream(inputItems)
-                .map(this::parseItem)
-                .collect(Collectors.toList());
-        validateDuplicatedItemName(parsedItems);
-        return parsedItems;
-    }
-
-    private ItemDTO parseItem(String inputItem) {
-        String item = inputItem.substring(1, inputItem.length() - 1);
-        String[] properties = item.split(ITEM_PROPERTY_DELIMITER);
-        return new ItemDTO(properties[0], toInteger(properties[1]), toInteger(properties[2]));
-    }
-
     public int inputInsertAmount() {
         System.out.println(InputMessage.INPUT_INSERT_MONEY_AMOUNT);
         int amount = readNumber();
@@ -78,33 +42,28 @@ public class InputView {
         return amount;
     }
 
-    public String inputPurchaseItemName() {
-        System.out.println(InputMessage.INPUT_PURCHASE_ITEM_NAME);
-        String itemName = Console.readLine();
-        validateString(itemName);
-        System.out.println();
-        return itemName;
+    private List<ItemDTO> parseItems(String[] inputItems) {
+        InputValidator.validateItemsFormat(inputItems);
+        List<ItemDTO> parsedItems = Arrays.stream(inputItems)
+                .map(this::parseItem)
+                .collect(Collectors.toList());
+        InputValidator.validateDuplicatedItemName(parsedItems);
+        return parsedItems;
     }
 
-    private void validateString(String value) {
-        if (value == null || value.isBlank()) {
-            throw new IllegalArgumentException(ErrorMessage.NULL_OR_EMPTY_STRING);
-        }
+    private ItemDTO parseItem(String inputItem) {
+        String item = inputItem.substring(1, inputItem.length() - 1);
+        String[] properties = item.split(ITEM_PROPERTY_DELIMITER);
+        return new ItemDTO(properties[0], parseInteger(properties[1]), parseInteger(properties[2]));
     }
 
     private int readNumber() {
-        int readValue = toInteger(Console.readLine());
-        validateIntegerToNumber(readValue);
+        int readValue = parseInteger(Console.readLine());
+        InputValidator.validateIntegerToNumber(readValue);
         return readValue;
     }
 
-    private void validateIntegerToNumber(int value) {
-        if (value < 0) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_VALUE);
-        }
-    }
-
-    private int toInteger(String number) {
+    private int parseInteger(String number) {
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {
