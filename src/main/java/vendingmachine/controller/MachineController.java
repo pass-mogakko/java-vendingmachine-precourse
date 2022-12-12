@@ -1,15 +1,20 @@
 package vendingmachine.controller;
 
+import vendingmachine.domain.Machine;
+import vendingmachine.domain.Coins;
 import vendingmachine.view.InputView;
 
 import static vendingmachine.util.ExceptionHandler.*;
 
 public class MachineController {
+    private Machine machine;
     public void run() {
-        createCoins();
+        setUp();
     }
 
-    private void createCoins() {
-        String machineMoney = handleException(InputView::readMachineMoney);
+    private void setUp() {
+        int machineMoney = handleInputException(InputView::readMachineMoney);
+        machine = new Machine(machineMoney);
     }
+
 }
