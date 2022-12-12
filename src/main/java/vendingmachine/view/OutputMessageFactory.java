@@ -6,7 +6,7 @@ import java.util.List;
 
 public class OutputMessageFactory {
     private static final String ERROR_FORM = "[ERROR] %s";
-    private static final String COIN_INFO = "%s - %s";
+    private static final String COIN_INFO = "%s - %s개";
     private static final String LINE_SEPARATOR = "\n";
     private static final String USER_MONEY_INFO = "투입 금액: %s원";
 
@@ -23,7 +23,20 @@ public class OutputMessageFactory {
         return result;
     }
 
+    static String createResultInfo(List<CoinDto> coinDtos) {
+        String result = "";
+        for (CoinDto coinDto : coinDtos) {
+            if (coinDto.getCnt() == 0) {
+                continue;
+            }
+            result += String.format(COIN_INFO, coinDto.getName(), coinDto.getCnt());
+            result += LINE_SEPARATOR;
+        }
+        return result;
+    }
+
     static String createUserMoneyInfo(int userMoney) {
         return String.format(USER_MONEY_INFO, userMoney);
     }
+
 }

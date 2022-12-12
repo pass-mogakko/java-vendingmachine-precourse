@@ -8,23 +8,30 @@ import static camp.nextstep.edu.missionutils.Randoms.pickNumberInList;
 import static vendingmachine.domain.Coin.*;
 
 public class Coins {
-    private Map<Coin, Integer> coins;
+    private final Map<Coin, Integer> coins;
 
-    public Coins(int machineMoney) {
-        this.coins = generateCoins(machineMoney);
+    public Coins() {
+        this.coins = new HashMap<>();
     }
 
-    public Map<Coin, Integer> generateCoins(int machineMoney) {
-        HashMap<Coin, Integer> tmp = new HashMap<>();
+    public Map<Coin, Integer> generateRandomCoins(int machineMoney) {
         for (Coin coin : List.of(COIN_500, COIN_100, COIN_50)) {
-            tmp.put(coin, generateCoinRange(coin, machineMoney));
-            machineMoney -= coin.getAmount() * tmp.get(coin);
+            coins.put(coin, decideRandomCount(coin, machineMoney));
+            machineMoney -= coin.getAmount() * coins.get(coin);
         }
-        tmp.put(COIN_10, machineMoney / COIN_10.getAmount());
-        return tmp;
+        coins.put(COIN_10, machineMoney / COIN_10.getAmount());
+        return coins;
     }
 
-    private Integer generateCoinRange(Coin coin, int leftMoney) {
+    public Map<Coin, Integer> generateResultCoins(int leftMoney) {
+        for (Coin coin : Coin.values()) {
+            coins.put(coin, leftMoney / coin.getAmount());
+            leftMoney -= coin.getAmount() * coins.get(coin);
+        }
+        return coins;
+    }
+
+    private Integer decideRandomCount(Coin coin, int leftMoney) {
         int maxCount = leftMoney / coin.getAmount();
         if (maxCount > 0) {
             List<Integer> possibleRange = Stream.iterate(0, i -> i+1)

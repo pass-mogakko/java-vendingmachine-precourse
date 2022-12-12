@@ -8,23 +8,24 @@ import java.util.List;
 import static vendingmachine.constant.ErrorMessage.*;
 
 public class Machine {
-    private int setUpMoney;
-    private int userMoney;
-    private final Coins coins;
+    private final int setUpMoney;
+    private final Coins setUpCoins;
     private final Products products;
     private int minPrice;
+    private int userMoney;
+
+    private final DtoBuilder dtoBuilder = new DtoBuilder();
 
     public Machine(int machineMoney) {
         this.setUpMoney = machineMoney;
         this.userMoney = 0;
-        this.coins = new Coins(machineMoney);
+        this.setUpCoins = new Coins();
         this.products = new Products();
         this.minPrice = Integer.MAX_VALUE;
     }
 
-    public List<CoinDto> createCoinDto() {
-        DtoBuilder dtoBuilder = new DtoBuilder();
-        return dtoBuilder.buildCoinDtos(coins);
+    public void setUpRandomCoins(int machineMoney) {
+        setUpCoins.generateRandomCoins(machineMoney);
     }
 
     public void setUserMoney(int userMoney) {
@@ -33,6 +34,16 @@ public class Machine {
 
     public int getUserMoney() {
         return userMoney;
+    }
+
+    public List<CoinDto> generateInitCoinDto() {
+        return dtoBuilder.buildCoinDtos(setUpCoins);
+    }
+
+    public List<CoinDto> generateResultCoinDtos() {
+        Coins coins = new Coins();
+        coins.generateResultCoins(userMoney);
+        return dtoBuilder.buildCoinDtos(coins);
     }
 
     public void registerProduct(String name, int price, int count) {
@@ -61,4 +72,5 @@ public class Machine {
                 .sum();
         return (userMoney > minPrice && totalStock > 0);
     }
+
 }

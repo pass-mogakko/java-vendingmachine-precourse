@@ -1,5 +1,6 @@
 package vendingmachine.controller;
 
+import vendingmachine.domain.Coins;
 import vendingmachine.domain.Machine;
 import vendingmachine.domain.dto.request.ProductDto;
 import vendingmachine.domain.dto.response.CoinDto;
@@ -17,13 +18,15 @@ public class MachineController {
         setUp();
         register();
         consume();
+        finish();
     }
 
     private void setUp() {
         int initMoney = handleInputException(InputView::readInitMoney);
         machine = new Machine(initMoney);
 
-        List<CoinDto> coinDtos = machine.createCoinDto();
+        machine.setUpRandomCoins(initMoney);
+        List<CoinDto> coinDtos = machine.generateInitCoinDto();
         OutputView.printInitCoins(coinDtos);
     }
 
@@ -54,6 +57,14 @@ public class MachineController {
         OutputView.printUserMoney(userMoney);
         String productName = handleInputException(InputView::readProductName);
         machine.consumeProduct(productName);
+    }
+
+    private void finish() {
+        int userMoney = machine.getUserMoney();
+        Coins resultCoins = new Coins();
+        resultCoins.generateResultCoins(userMoney);
+        List<CoinDto> resultDtos = machine.generateResultCoinDtos();
+        OutputView.printResult(resultDtos);
     }
 
 }
