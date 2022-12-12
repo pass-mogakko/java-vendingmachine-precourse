@@ -1,6 +1,6 @@
 package vendingmachine.view;
 
-import vendingmachine.domain.dto.CoinDto;
+import vendingmachine.domain.dto.response.CoinDto;
 
 import java.util.List;
 

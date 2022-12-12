@@ -1,4 +1,4 @@
-package vendingmachine.domain.dto;
+package vendingmachine.domain.dto.response;
 
 public class CoinDto {
     private String name;
