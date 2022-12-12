@@ -14,21 +14,20 @@ public class Coins {
         this.coins = new HashMap<>();
     }
 
-    public Map<Coin, Integer> generateRandomCoins(int machineMoney) {
+    public void generateRandomCoins(int machineMoney) {
         for (Coin coin : List.of(COIN_500, COIN_100, COIN_50)) {
             coins.put(coin, decideRandomCount(coin, machineMoney));
             machineMoney -= coin.getAmount() * coins.get(coin);
         }
         coins.put(COIN_10, machineMoney / COIN_10.getAmount());
-        return coins;
     }
 
-    public Map<Coin, Integer> generateResultCoins(int leftMoney) {
+    public void generateResultCoins(int leftMoney, Coins setUpCoins) {
         for (Coin coin : Coin.values()) {
-            coins.put(coin, leftMoney / coin.getAmount());
-            leftMoney -= coin.getAmount() * coins.get(coin);
+            int maxCnt = Collections.min(List.of(leftMoney / coin.getAmount(), setUpCoins.coins.get(coin)));
+            coins.put(coin, maxCnt);
+            leftMoney -= coin.getAmount() * maxCnt;
         }
-        return coins;
     }
 
     private Integer decideRandomCount(Coin coin, int leftMoney) {

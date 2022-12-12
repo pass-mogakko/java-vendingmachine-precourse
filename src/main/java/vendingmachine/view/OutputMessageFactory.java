@@ -24,15 +24,15 @@ public class OutputMessageFactory {
     }
 
     static String createResultInfo(List<CoinDto> coinDtos) {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (CoinDto coinDto : coinDtos) {
             if (coinDto.getCnt() == 0) {
                 continue;
             }
-            result += String.format(COIN_INFO, coinDto.getName(), coinDto.getCnt());
-            result += LINE_SEPARATOR;
+            result.append(String.format(COIN_INFO, coinDto.getName(), coinDto.getCnt()));
+            result.append(LINE_SEPARATOR);
         }
-        return result;
+        return result.toString();
     }
 
     static String createUserMoneyInfo(int userMoney) {

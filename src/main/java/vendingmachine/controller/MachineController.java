@@ -61,8 +61,7 @@ public class MachineController {
 
     private void finish() {
         int userMoney = machine.getUserMoney();
-        Coins resultCoins = new Coins();
-        resultCoins.generateResultCoins(userMoney);
+        Coins resultCoins = machine.computeResultCoins();
         List<CoinDto> resultDtos = machine.generateResultCoinDtos();
         OutputView.printResult(resultDtos);
     }

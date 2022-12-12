@@ -42,7 +42,7 @@ public class Machine {
 
     public List<CoinDto> generateResultCoinDtos() {
         Coins coins = new Coins();
-        coins.generateResultCoins(userMoney);
+        coins.generateResultCoins(userMoney, setUpCoins);
         return dtoBuilder.buildCoinDtos(coins);
     }
 
@@ -71,6 +71,12 @@ public class Machine {
                 .mapToInt(Integer::intValue)
                 .sum();
         return (userMoney > minPrice && totalStock > 0);
+    }
+
+    public Coins computeResultCoins(){
+        Coins resultCoins = new Coins();
+        resultCoins.generateResultCoins(userMoney, setUpCoins);
+        return resultCoins;
     }
 
 }
