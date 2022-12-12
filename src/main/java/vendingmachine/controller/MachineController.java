@@ -36,9 +36,24 @@ public class MachineController {
     private void consume() {
         int userMoney = handleInputException(InputView::readUserMoney);
         machine.setUserMoney(userMoney);
+        repeatSelecting();
+    }
 
+    private void repeatSelecting() {
+        while (machine.available()) {
+            try {
+                selectProduct();
+            } catch (IllegalArgumentException e) {
+                OutputView.printError(e);
+            }
+        }
+    };
+
+    private void selectProduct() {
+        int userMoney = machine.getUserMoney();
         OutputView.printUserMoney(userMoney);
         String productName = handleInputException(InputView::readProductName);
+        machine.consumeProduct(productName);
     }
 
 }

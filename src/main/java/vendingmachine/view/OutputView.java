@@ -14,6 +14,7 @@ public class OutputView {
 
         System.out.println();
         System.out.println(errorMessage);
+        System.out.println();
     }
 
     public static void printInitCoins(List<CoinDto> coinDtos) {
@@ -27,7 +28,6 @@ public class OutputView {
     public static void printUserMoney(int userMoney) {
         String userMoneyInfo = OutputMessageFactory.createUserMoneyInfo(userMoney);
 
-        System.out.println();
         System.out.println(userMoneyInfo);
     }
 

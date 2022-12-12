@@ -28,7 +28,6 @@ public class InputView {
     }
 
     public static List<ProductDto> readProductInfo() {
-        System.out.println();
         System.out.println(PRODUCT_INFO_REQUEST_MESSAGE);
 
         String input = Console.readLine();
