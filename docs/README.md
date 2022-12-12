@@ -177,7 +177,7 @@ public enum Coin {
 }
 ```
 
-- [ ] 필드(인스턴스 변수)인 **`amount`의 접근 제어자 private을 변경할 수 없다.**
+- [x] 필드(인스턴스 변수)인 **`amount`의 접근 제어자 private을 변경할 수 없다.**
 
 
 <br>
@@ -188,9 +188,9 @@ public enum Coin {
     <summary> <b>Randoms, Console</b> </summary>
     <div markdown="1">
 
-- [ ] JDK에서 기본 제공하는 Random, Scanner API 대신 `camp.nextstep.edu.missionutils`에서 제공하는 `Randoms`, `Console` API를 활용해 구현해야 한다. 
-- [ ] Random 값 추출은 `camp.nextstep.edu.missionutils.Randoms`의 `pickNumberInList()`를 활용한다.
-- [ ] 사용자가 입력하는 값은 `camp.nextstep.edu.missionutils.Console`의 `readLine()`을 활용한다.
+- [x] JDK에서 기본 제공하는 Random, Scanner API 대신 `camp.nextstep.edu.missionutils`에서 제공하는 `Randoms`, `Console` API를 활용해 구현해야 한다. 
+- [x] Random 값 추출은 `camp.nextstep.edu.missionutils.Randoms`의 `pickNumberInList()`를 활용한다.
+- [x] 사용자가 입력하는 값은 `camp.nextstep.edu.missionutils.Console`의 `readLine()`을 활용한다.
 - [ ] 프로그램 구현을 완료했을 때 `src/test/java` 디렉터리의 `ApplicationTest`에 있는 모든 테스트 케이스가 성공해야 한다. **테스트가 실패할 경우 0점 처리한다.**
 
 <br>
@@ -229,15 +229,13 @@ public enum Coin {
   - [x] `exception` : 투입 금액이 10원 단위로 나누어떨어지는 값이 아니면 예외 처리
   - [x] `exception` : 투입 금액이 양의 정수가 아닐 경우 예외 처리
 
-- [ ] `출력 UI` : 남은 투입 금액 출력하기
+- [x] `출력 UI` : 남은 투입 금액 출력하기
   - [ ] 만약 남은 투입 금액이 상품의 최저 가격보다 적거나, 모든 상품이 소진된 경우 바로 잔돈을 돌려준다.
-  - [ ] 만약 위에 해당하지 안을 경우, 구매할 상품명 입력받기로 돌아
+  - [ ] 만약 위에 해당하지 안을 경우, 구매할 상품명 입력받기로 돌아간다.
 
-- [ ] `입력 UI` : 구매할 상품명 입력받기
-  - [ ] `exception` : 상품명이 온전한 한글이 아니거나 특수문자, 공백으로 이루어진 경우 예외 처리
+- [x] `입력 UI` : 구매할 상품명 입력받기
+  - [x] `exception` : 상품명이 온전한 한글이 아니거나 특수문자, 공백으로 이루어진 경우 예외 처리
   - [ ] `exception` : 해당 상품명이 없으면 예외 처리
-간다.
-
 
 
 ### 잔돈 반환

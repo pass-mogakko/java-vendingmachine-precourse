@@ -24,9 +24,15 @@ public class OutputView {
         System.out.println(coinInfo);
     }
 
+    public static void printUserMoney(int userMoney) {
+        String userMoneyInfo = OutputMessageFactory.createUserMoneyInfo(userMoney);
+
+        System.out.println();
+        System.out.println(userMoneyInfo);
+    }
+
     static class Message {
         static final String MACHINE_MONEY_INFO_MESSAGE = "자판기가 보유한 동전";
     }
-
 
 }

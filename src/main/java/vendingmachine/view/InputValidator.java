@@ -9,9 +9,9 @@ import java.util.regex.Pattern;
 
 import static vendingmachine.constant.ErrorMessage.*;
 import static vendingmachine.constant.Setting.MINIMUM_PRODUCT_PRICE;
-import static vendingmachine.view.InputValidator.ValidationPattern.VALID_NAME_PATTERN;
 
 class InputValidator {
+    static final Pattern VALID_NAME_PATTERN = Pattern.compile("^[가-힣 ]*$");
 
     static void validateMoney(String input) {
         try {
@@ -23,7 +23,7 @@ class InputValidator {
         }
     }
 
-    public static void validateProducts(String input) {
+    static void validateProducts(String input) {
         try {
             DtoBuilder dtoBuilder = new DtoBuilder();
             List<ProductDto> productDtos = dtoBuilder.buildProductDtos(input);
@@ -56,7 +56,7 @@ class InputValidator {
         }
     }
 
-    private static void validateName(String name) {
+    static void validateName(String name) {
         if (!VALID_NAME_PATTERN.matcher(name).matches()) {
             throw new IllegalArgumentException(INVALID_PRODUCT_NAME);
         }
@@ -68,7 +68,4 @@ class InputValidator {
         }
     }
 
-    static class ValidationPattern {
-        static final Pattern VALID_NAME_PATTERN = Pattern.compile("^[가-힣 ]*$");
-    }
 }

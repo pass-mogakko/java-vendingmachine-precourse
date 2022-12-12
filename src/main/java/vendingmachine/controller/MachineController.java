@@ -36,6 +36,9 @@ public class MachineController {
     private void consume() {
         int userMoney = handleInputException(InputView::readUserMoney);
         machine.setUserMoney(userMoney);
+
+        OutputView.printUserMoney(userMoney);
+        String productName = handleInputException(InputView::readProductName);
     }
 
 }

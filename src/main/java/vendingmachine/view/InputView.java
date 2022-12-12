@@ -38,10 +38,19 @@ public class InputView {
         return dtoBuilder.buildProductDtos(input);
     }
 
+    public static String readProductName() {
+        System.out.println(PRODUCT_NAME_REQUEST_MESSAGE);
+
+        String input = Console.readLine();
+        InputValidator.validateName(input);
+        return input;
+    }
+
     static class Message {
         static final String MACHINE_MONEY_REQUEST_MESSAGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
         static final String CONSUMING_MONEY_REQUEST_MESSAGE = "투입 금액을 입력해 주세요.";
         static final String PRODUCT_INFO_REQUEST_MESSAGE = "상품명과 가격, 수량을 입력해 주세요.";
+        static final String PRODUCT_NAME_REQUEST_MESSAGE = "구매할 상품명을 입력해 주세요.";
     }
 
 }

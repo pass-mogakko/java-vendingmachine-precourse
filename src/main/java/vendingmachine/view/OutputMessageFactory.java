@@ -6,10 +6,11 @@ import java.util.List;
 
 public class OutputMessageFactory {
     private static final String ERROR_FORM = "[ERROR] %s";
-    static final String COIN_INFO = "%s - %s";
-    static final String LINE_SEPARATOR = "\n";
+    private static final String COIN_INFO = "%s - %s";
+    private static final String LINE_SEPARATOR = "\n";
+    private static final String USER_MONEY_INFO = "투입 금액: %s원";
 
-    public static String createErrorMessage(String message) {
+    static String createErrorMessage(String message) {
         return String.format(ERROR_FORM, message);
     }
 
@@ -22,4 +23,7 @@ public class OutputMessageFactory {
         return result;
     }
 
+    static String createUserMoneyInfo(int userMoney) {
+        return String.format(USER_MONEY_INFO, userMoney);
+    }
 }
