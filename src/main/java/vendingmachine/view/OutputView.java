@@ -17,10 +17,9 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printMachineMoney(List<CoinDto> coinDtos) {
+    public static void printInitCoins(List<CoinDto> coinDtos) {
         String coinInfo = OutputMessageFactory.createCoinInfo(coinDtos);
 
-        System.out.println();
         System.out.println(MACHINE_MONEY_INFO_MESSAGE);
         System.out.println(coinInfo);
     }

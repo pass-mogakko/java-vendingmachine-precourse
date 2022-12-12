@@ -6,7 +6,7 @@ import static vendingmachine.constant.ErrorMessage.*;
 
 class InputValidator {
 
-    static void validateMachineMoney(String input) {
+    static void validateMoney(String input) {
         try {
             int number = Integer.parseInt(input);
             checkNumberRange(number);
@@ -15,6 +15,7 @@ class InputValidator {
             throw new IllegalArgumentException(INVALID_MACHINE_MONEY);
         }
     }
+
 
     private static void checkNumberRange(int number) {
         if (number < Setting.MINIMAL_MACHINE_MONEY) {
