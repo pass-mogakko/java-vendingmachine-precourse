@@ -15,7 +15,6 @@ public class InputView {
 
     static class Message {
         static final String MACHINE_MONEY_REQUEST_MESSAGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
-        static final String MACHINE_MONEY_INFO_MESSAGE = "자판기가 보유한 동전";
     }
 
 }
